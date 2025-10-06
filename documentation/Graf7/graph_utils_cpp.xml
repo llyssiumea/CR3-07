@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>graph_utils.cpp</name>
+        <path>3/Graf7/graph_utils.cpp</path>
+        <type>Implementation</type>
+        <version>2.3</version>
+        <description>Реализация вспомогательных функций для работы с графами</description>
+    </file_info>
+    
+    <implementations>
+        <method name="GraphUtils::breadthFirstSearch">
+            <description>Реализация алгоритма поиска в ширину (BFS) с ограничением расстояния</description>
+            <algorithm>
+                1. Инициализация массива расстояний значением -1
+                2. Помещение стартовой вершины в очередь с расстоянием 0
+                3. Пока очередь не пуста:
+                   - Извлечение текущей вершины
+                   - Если расстояние ≥ maxDistance - пропуск
+                   - Обход всех соседей:
+                     * Если сосед не посещен - установка расстояния и добавление в очередь
+                     * Добавление в множество достижимых
+            </algorithm>
+            <complexity>O(V + E) где V - вершины, E - ребра</complexity>
+            <important_note>Стартовая вершина НЕ добавляется в множество достижимых</important_note>
+        </method>
+        
+        <method name="GraphUtils::isValidCity">
+            <description>Проверка корректности номера города с учетом 1-based индексации</description>
+            <validation>
+                <condition>city ≥ 1</condition>
+                <condition>city ≤ cityCount</condition>
+                <condition>cityCount > 0</condition>
+            </validation>
+        </method>
+        
+        <method name="GraphUtils::isValidL">
+            <description>Проверка неотрицательности параметра L</description>
+            <validation>
+                <condition>L ≥ 0</condition>
+            </validation>
+            <purpose>L представляет количество промежуточных городов, не может быть отрицательным</purpose>
+        </method>
+        
+        <method name="GraphUtils::findIntersection">
+            <description>Поиск общих элементов в двух множествах с последующей сортировкой</description>
+            <algorithm>
+                1. Итерация по элементам первого множества
+                2. Проверка наличия элемента во втором множестве
+                3. Добавление общих элементов в результирующий вектор
+                4. Сортировка вектора по возрастанию
+            </algorithm>
+            <complexity>O(n log n) где n - размер меньшего множества</complexity>
+        </method>
+    </implementations>
+    
+    <dependencies>
+        <include_local>graph_utils.h</include_local>
+        <include_system>algorithm</include_system>
+    </dependencies>
+    
+    <author>Alyssa</author>
+    <last_modified>2024-10-06</last_modified>
+</file_documentation>

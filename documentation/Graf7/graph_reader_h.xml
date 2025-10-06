@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>graph_reader.h</name>
+        <path>3/Graf7/graph_reader.h</path>
+        <type>Header</type>
+        <version>2.0</version>
+        <description>Чтение графа из файла и валидация матрицы смежности</description>
+    </file_info>
+    
+    <class name="GraphReader">
+        <description>Читатель графа из текстового файла</description>
+        <purpose>Обеспечивает чтение и валидацию матрицы смежности из файла</purpose>
+        
+        <static_methods>
+            <method name="readFromFile" return="AdjacencyMatrix">
+                <parameters>
+                    <param name="filename" type="const std::string&amp;">Имя файла</param>
+                    <param name="cityCount" type="int&amp;">Количество городов (output)</param>
+                </parameters>
+                <description>Чтение графа из файла с полной валидацией данных</description>
+                <throws>std::runtime_error при ошибках чтения или валидации</throws>
+            </method>
+            
+            <method name="validateMatrix" return="bool">
+                <parameters>
+                    <param name="matrix" type="const AdjacencyMatrix&amp;">Матрица для проверки</param>
+                    <param name="cityCount" type="int">Количество городов</param>
+                </parameters>
+                <description>Валидация матрицы смежности на корректность</description>
+                <checks>
+                    <check>Соответствие размеров матрицы</check>
+                    <check>Симметричность матрицы (неориентированный граф)</check>
+                    <check>Корректность значений (0 или 1)</check>
+                </checks>
+            </method>
+        </static_methods>
+        
+        <private_methods>
+            <method name="isValidCityCount" return="bool">
+                <parameters>
+                    <param name="count" type="int">Количество городов</param>
+                </parameters>
+                <description>Проверка корректности количества городов</description>
+                <returns>true если 1 ≤ count ≤ 25</returns>
+            </method>
+            
+            <method name="isValidMatrixValue" return="bool">
+                <parameters>
+                    <param name="value" type="int">Значение в матрице</param>
+                </parameters>
+                <description>Проверка корректности значения в матрице смежности</description>
+                <returns>true если value = 0 или value = 1</returns>
+            </method>
+        </private_methods>
+    </class>
+    
+    <file_format>
+        <description>Формат входного файла cities.txt</description>
+        <line number="1">Количество городов n (1 ≤ n ≤ 25)</line>
+        <line number="2..n+1">Матрица смежности n×n (0 или 1)</line>
+        <example>
+            4
+            0 1 1 0
+            1 0 1 1
+            1 1 0 0
+            0 1 0 0
+        </example>
+    </file_format>
+    
+    <dependencies>
+        <include_local>graph_utils.h</include_local>
+        <include>string</include>
+    </dependencies>
+    
+    <author>Alyssa</author>
+    <last_modified>2024-10-06</last_modified>
+</file_documentation>

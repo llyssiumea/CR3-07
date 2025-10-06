@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>tree_transformer.cpp</name>
+        <path>2/CalcTree4/tree_transformer.cpp</path>
+        <type>Implementation</type>
+        <version>2.0</version>
+        <description>Реализация преобразователя дерева выражений</description>
+    </file_info>
+    
+    <implementations>
+        <method name="TreeTransformer::removeDivisionOperations">
+            <description>Основная функция преобразования, запускает рекурсивный обход</description>
+            <algorithm>Запуск transformRecursive от корня дерева</algorithm>
+        </method>
+        
+        <method name="TreeTransformer::evaluateSubtree">
+            <description>Публичный интерфейс для вычисления значения поддерева</description>
+            <algorithm>Запуск evaluateRecursive от корня поддерева</algorithm>
+        </method>
+        
+        <method name="TreeTransformer::evaluateRecursive">
+            <description>Рекурсивное вычисление значения дерева выражения</description>
+            <algorithm>
+                if узел - операнд: вернуть значение
+                else: 
+                  вычислить левое поддерево
+                  вычислить правое поддерево  
+                  применить операцию к результатам
+            </algorithm>
+            <traversal>Post-order (сначала потомки, затем родитель)</traversal>
+            <error_handling>Проверка деления на ноль для операций / и %</error_handling>
+        </method>
+        
+        <method name="TreeTransformer::transformRecursive">
+            <description>Рекурсивное преобразование дерева с заменой операций деления</description>
+            <algorithm>
+                1. Рекурсивное преобразование левого и правого поддеревьев
+                2. Если текущий узел - операция деления или остатка:
+                   - Вычислить значение поддерева
+                   - Удалить текущий узел и его поддеревья
+                   - Создать новый листовой узел с вычисленным значением
+                3. Вернуть преобразованный узел
+            </algorithm>
+            <memory_management>
+                <action>Удаление старых узлов операций деления</action>
+                <action>Создание новых листовых узлов</action>
+                <action>Корректное освобождение памяти поддеревьев</action>
+            </memory_management>
+        </method>
+    </implementations>
+    
+    <dependencies>
+        <include_local>tree_transformer.h</include_local>
+        <include_system>stdexcept</include_system>
+    </dependencies>
+    
+    <author>Alyssa</author>
+    <last_modified>2024-10-06</last_modified>
+</file_documentation>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>graph_utils.h</name>
+        <path>3/Graf7/graph_utils.h</path>
+        <type>Header</type>
+        <version>2.0</version>
+        <description>Вспомогательные функции и структуры для работы с графами</description>
+    </file_info>
+    
+    <typedef name="AdjacencyMatrix">
+        <description>Псевдоним для матрицы смежности графа</description>
+        <type>std::vector&lt;std::vector&lt;int&gt;&gt;</type>
+        <usage>Представление графа в виде матрицы n×n</usage>
+    </typedef>
+    
+    <struct name="BFSResult">
+        <description>Результат обхода графа в ширину</description>
+        <fields>
+            <field name="distances" type="std::vector&lt;int&gt;">
+                <description>Расстояния от стартовой вершины до всех остальных</description>
+                <values>-1 для недостижимых вершин</values>
+            </field>
+            <field name="reachable" type="std::set&lt;int&gt;">
+                <description>Множество достижимых вершин (индексы 0-based)</description>
+            </field>
+        </fields>
+    </struct>
+    
+    <namespace name="GraphUtils">
+        <functions>
+            <function name="breadthFirstSearch" return="BFSResult">
+                <parameters>
+                    <param name="graph" type="const AdjacencyMatrix&amp;">Матрица смежности</param>
+                    <param name="start" type="int">Стартовая вершина</param>
+                    <param name="maxDistance" type="int">Максимальное расстояние (количество ребер)</param>
+                </parameters>
+                <description>Поиск в ширину (BFS) с ограничением по расстоянию</description>
+                <algorithm>Обход графа в ширину с отслеживанием расстояний</algorithm>
+            </function>
+            
+            <function name="isValidCity" return="bool">
+                <parameters>
+                    <param name="city" type="int">Номер города</param>
+                    <param name="cityCount" type="int">Общее количество городов</param>
+                </parameters>
+                <description>Проверка корректности номера города</description>
+                <returns>true если 1 ≤ city ≤ cityCount</returns>
+            </function>
+            
+            <function name="isValidL" return="bool">
+                <parameters>
+                    <param name="L" type="int">Максимальное количество промежуточных городов</param>
+                </parameters>
+                <description>Проверка корректности параметра L</description>
+                <returns>true если L ≥ 0</returns>
+            </function>
+            
+            <function name="findIntersection" return="std::vector&lt;int&gt;">
+                <parameters>
+                    <param name="set1" type="const std::set&lt;int&gt;&amp;">Первое множество</param>
+                    <param name="set2" type="const std::set&lt;int&gt;&amp;">Второе множество</param>
+                </parameters>
+                <description>Поиск пересечения двух множеств с сортировкой результата</description>
+                <returns>Отсортированный вектор общих элементов</returns>
+            </function>
+        </functions>
+    </namespace>
+    
+    <dependencies>
+        <include>vector</include>
+        <include>queue</include>
+        <include>set</include>
+    </dependencies>
+    
+    <author>Alyssa</author>
+    <last_modified>2024-10-06</last_modified>
+</file_documentation>

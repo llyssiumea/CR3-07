@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>tree_builder.h</name>
+        <path>2/CalcTree4/tree_builder.h</path>
+        <type>Header</type>
+        <version>2.0</version>
+        <description>Построение дерева выражения из обратной польской записи</description>
+    </file_info>
+    
+    <class name="TreeBuilder">
+        <description>Построитель дерева выражения из RPN (Reverse Polish Notation)</description>
+        <purpose>Преобразует выражение в обратной польской записи в бинарное дерево</purpose>
+        
+        <static_methods>
+            <method name="buildFromRPN" return="TreeNode*">
+                <parameters>
+                    <param name="tokens" type="const std::vector&lt;std::string&gt;&amp;">Вектор токенов в RPN</param>
+                </parameters>
+                <description>Построение дерева из вектора токенов обратной польской записи</description>
+                <throws>std::runtime_error при некорректном выражении</throws>
+            </method>
+            
+            <method name="buildFromString" return="TreeNode*">
+                <parameters>
+                    <param name="expression" type="const std::string&amp;">Строка с выражением в RPN</param>
+                </parameters>
+                <description>Построение дерева из строки с токенами, разделенными пробелами</description>
+            </method>
+            
+            <method name="buildFromFile" return="TreeNode*">
+                <parameters>
+                    <param name="filename" type="const std::string&amp;">Имя файла с выражением в RPN</param>
+                </parameters>
+                <description>Чтение выражения из файла и построение дерева</description>
+                <throws>std::runtime_error при ошибках чтения файла</throws>
+            </method>
+        </static_methods>
+        
+        <private_methods>
+            <method name="tokenize" return="std::vector&lt;std::string&gt;">
+                <parameters>
+                    <param name="expression" type="const std::string&amp;">Входная строка</param>
+                </parameters>
+                <description>Разбор строки на токены с разделением по пробелам</description>
+            </method>
+            
+            <method name="isValidToken" return="bool">
+                <parameters>
+                    <param name="token" type="const std::string&amp;">Токен для проверки</param>
+                </parameters>
+                <description>Валидация токена (оператор или цифра 0-9)</description>
+            </method>
+        </private_methods>
+    </class>
+    
+    <algorithm>
+        <name>Построение дерева из RPN с использованием стека</name>
+        <steps>
+            <step>1. Инициализация пустого стека узлов</step>
+            <step>2. Для каждого токена в выражении:</step>
+            <step>3. Если токен - операнд: создать листовой узел и поместить в стек</step>
+            <step>4. Если токен - оператор: извлечь два узла из стека, создать узел оператора, поместить в стек</step>
+            <step>5. В конце в стеке должен остаться один узел - корень дерева</step>
+        </steps>
+    </algorithm>
+    
+    <dependencies>
+        <include_local>tree_utils.h</include_local>
+        <include>vector</include>
+        <include>string</include>
+    </dependencies>
+    
+    <author>Alyssa</author>
+    <last_modified>2024-10-06</last_modified>
+</file_documentation>

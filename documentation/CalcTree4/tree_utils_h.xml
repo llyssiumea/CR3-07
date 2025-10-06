@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>tree_utils.h</name>
+        <path>2/CalcTree4/tree_utils.h</path>
+        <type>Header</type>
+        <version>2.0</version>
+        <description>Вспомогательные функции и структуры для работы с деревьями выражений</description>
+    </file_info>
+    
+    <struct name="TreeNode">
+        <description>Узел бинарного дерева арифметического выражения</description>
+        <fields>
+            <field name="value" type="int">
+                <description>Значение: 0-9 для операндов, -1..-6 для операций</description>
+                <codes>
+                    <code value="-1">Сложение (+)</code>
+                    <code value="-2">Вычитание (-)</code>
+                    <code value="-3">Умножение (*)</code>
+                    <code value="-4">Деление (/)</code>
+                    <code value="-5">Остаток (%)</code>
+                    <code value="-6">Степень (^)</code>
+                </codes>
+            </field>
+            <field name="left" type="TreeNode*">Указатель на левое поддерево</field>
+            <field name="right" type="TreeNode*">Указатель на правое поддерево</field>
+        </fields>
+        <constructors>
+            <constructor>
+                <parameters>
+                    <param name="val" type="int">Значение узла</param>
+                    <param name="l" type="TreeNode*" optional="true">Левое поддерево</param>
+                    <param name="r" type="TreeNode*" optional="true">Правое поддерево</param>
+                </parameters>
+            </constructor>
+        </constructors>
+        <destructor>Рекурсивно удаляет все поддерево</destructor>
+    </struct>
+    
+    <namespace name="TreeUtils">
+        <functions>
+            <function name="isOperator" return="bool">
+                <parameters>
+                    <param name="token" type="const std::string&amp;">Токен для проверки</param>
+                </parameters>
+                <description>Проверка, является ли токен оператором (+, -, *, /, %, ^)</description>
+            </function>
+            <function name="operatorToCode" return="int">
+                <parameters>
+                    <param name="op" type="char">Символ оператора</param>
+                </parameters>
+                <description>Преобразование символа оператора в числовой код</description>
+                <throws>std::runtime_error для неизвестных операторов</throws>
+            </function>
+            <function name="codeToOperator" return="char">
+                <parameters>
+                    <param name="code" type="int">Числовой код операции</param>
+                </parameters>
+                <description>Преобразование числового кода в символ оператора</description>
+            </function>
+            <function name="isDivisionOperation" return="bool">
+                <parameters>
+                    <param name="code" type="int">Код операции</param>
+                </parameters>
+                <description>Проверка, является ли операция делением или остатком</description>
+            </function>
+            <function name="computeOperation" return="int">
+                <parameters>
+                    <param name="opCode" type="int">Код операции</param>
+                    <param name="left" type="int">Левый операнд</param>
+                    <param name="right" type="int">Правый операнд</param>
+                </parameters>
+                <description>Вычисление значения арифметической операции</description>
+                <throws>std::runtime_error при делении на ноль</throws>
+            </function>
+        </functions>
+    </namespace>
+    
+    <dependencies>
+        <include>string</include>
+    </dependencies>
+    
+    <author>Alyssa</author>
+    <last_modified>2024-10-06</last_modified>
+</file_documentation>

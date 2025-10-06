@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>tree_builder.cpp</name>
+        <path>2/CalcTree4/tree_builder.cpp</path>
+        <type>Implementation</type>
+        <version>2.0</version>
+        <description>Реализация построителя дерева выражения из RPN</description>
+    </file_info>
+    
+    <implementations>
+        <method name="TreeBuilder::buildFromRPN">
+            <description>Основной алгоритм построения дерева из обратной польской записи</description>
+            <algorithm>
+                1. Инициализация стека для узлов
+                2. Обработка каждого токена:
+                   - Операнд: создание листового узла, добавление в стек
+                   - Оператор: извлечение двух операндов, создание узла оператора
+                3. Проверка корректности результата (в стеке ровно один узел)
+            </algorithm>
+            <error_checks>
+                <check>Недостаточно операндов для оператора</check>
+                <check>Некорректные токены в выражении</check>
+                <check>Операнды вне диапазона 0-9</check>
+                <check>Неиспользованные операнды в конце</check>
+            </error_checks>
+            <complexity>O(n) где n - количество токенов</complexity>
+        </method>
+        
+        <method name="TreeBuilder::buildFromFile">
+            <description>Чтение выражения из файла с полной обработкой ошибок ввода/вывода</description>
+            <steps>
+                <step>Открытие файла и проверка успешности</step>
+                <step>Чтение количества городов (первая строка)</step>
+                <step>Чтение матрицы смежности построчно</step>
+                <step>Валидация каждого значения матрицы</step>
+            </steps>
+            <file_format>
+                <line number="1">Количество городов n</line>
+                <line number="2..n+1">Матрица смежности n×n</line>
+            </file_format>
+        </method>
+        
+        <method name="TreeBuilder::tokenize">
+            <description>Разбор строки на токены с использованием stringstream</description>
+            <algorithm>Использование std::istringstream для разделения по пробелам</algorithm>
+            <handling>Пропуск пустых токенов и пробелов</handling>
+        </method>
+        
+        <method name="TreeBuilder::isValidToken">
+            <description>Валидация токена выражения</description>
+            <valid_tokens>
+                <type name="operand">Одна цифра 0-9</type>
+                <type name="operator">Один символ: +, -, *, /, %, ^</type>
+            </valid_tokens>
+            <invalid_tokens>
+                <example>Многосимвольные числа</example>
+                <example>Неизвестные операторы</example>
+                <example>Пустые строки</example>
+            </invalid_tokens>
+        </method>
+    </implementations>
+    
+    <dependencies>
+        <include_local>tree_builder.h</include_local>
+        <include_system>fstream</include_system>
+        <include_system>sstream</include_system>
+        <include_system>stack</include_system>
+        <include_system>stdexcept</include_system>
+        <include_system>cctype</include_system>
+    </dependencies>
+    
+    <author>Alyssa</author>
+    <last_modified>2024-10-06</last_modified>
+</file_documentation>

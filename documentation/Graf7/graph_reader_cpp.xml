@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>graph_reader.cpp</name>
+        <path>3/Graf7/graph_reader.cpp</path>
+        <type>Implementation</type>
+        <version>2.0</version>
+        <description>Реализация чтения и валидации графа из файла</description>
+    </file_info>
+    
+    <implementations>
+        <method name="GraphReader::readFromFile">
+            <description>Основная функция чтения графа из файла с обработкой ошибок</description>
+            <steps>
+                <step>Открытие файла и проверка успешности</step>
+                <step>Чтение количества городов (первая строка)</step>
+                <step>Валидация количества городов (1-25)</step>
+                <step>Чтение матрицы смежности построчно</step>
+                <step>Валидация каждого значения матрицы (0 или 1)</step>
+                <step>Дополнительная валидация структуры матрицы</step>
+            </steps>
+            <error_handling>
+                <error_type>Ошибки открытия файла</error_type>
+                <error_type>Некорректный формат чисел</error_type>
+                <error_type>Некорректные размеры матрицы</error_type>
+                <error_type>Несимметричная матрица</error_type>
+            </error_handling>
+        </method>
+        
+        <method name="GraphReader::validateMatrix">
+            <description>Комплексная валидация матрицы смежности</description>
+            <validations>
+                <validation>Проверка количества строк (должно быть cityCount)</validation>
+                <validation>Проверка количества столбцов в каждой строке (должно быть cityCount)</validation>
+                <validation>Проверка симметричности: matrix[i][j] == matrix[j][i]</validation>
+                <validation>Проверка диагонали: matrix[i][i] == 0 (нет петель)</validation>
+            </validations>
+            <assumption>Граф неориентированный и без петель</assumption>
+        </method>
+        
+        <method name="GraphReader::isValidCityCount">
+            <description>Проверка ограничения на количество городов согласно условию задачи</description>
+            <constraints>
+                <constraint>Минимум: 1 город</constraint>
+                <constraint>Максимум: 25 городов</constraint>
+            </constraints>
+        </method>
+        
+        <method name="GraphReader::isValidMatrixValue">
+            <description>Проверка что значение матрицы является допустимым (0 или 1)</description>
+            <meaning>
+                <value code="0">Нет дороги между городами</value>
+                <value code="1">Есть дорога между городами</value>
+            </meaning>
+        </method>
+    </implementations>
+    
+    <dependencies>
+        <include_local>graph_reader.h</include_local>
+        <include_system>fstream</include_system>
+        <include_system>sstream</include_system>
+        <include_system>stdexcept</include_system>
+    </dependencies>
+    
+    <author>Alyssa</author>
+    <last_modified>2024-10-06</last_modified>
+</file_documentation>

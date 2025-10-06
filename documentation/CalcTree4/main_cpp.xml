@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>main.cpp</name>
+        <path>2/CalcTree4/main.cpp</path>
+        <type>Main Program</type>
+        <version>2.0</version>
+        <description>Основная программа для работы с деревьями выражений</description>
+    </file_info>
+    
+    <functions>
+        <function name="printInfixExpression" return="void">
+            <parameters>
+                <param name="root" type="TreeNode*">Корень дерева</param>
+            </parameters>
+            <description>Вывод дерева в виде инфиксного выражения со скобками</description>
+            <algorithm>In-order обход дерева с добавлением скобок вокруг операций</algorithm>
+            <output_format>(левое_поддерево оператор правое_поддерево)</output_format>
+        </function>
+        
+        <function name="printTreeStructure" return="void">
+            <parameters>
+                <param name="root" type="TreeNode*">Корень дерева</param>
+                <param name="level" type="int" optional="true">Текущий уровень вложенности</param>
+                <param name="prefix" type="const std::string&amp;" optional="true">Префикс для отображения</param>
+            </parameters>
+            <description>Визуализация структуры дерева в консоли в виде бокового дерева</description>
+            <algorithm>Reverse in-order обход для красивого отображения</algorithm>
+            <output_format>
+                ┌── правое_поддерево
+                узел
+                └── левое_поддерево
+            </output_format>
+        </function>
+        
+        <function name="main" return="int">
+            <description>Главная функция программы дерева выражений</description>
+            <program_flow>
+                1. Чтение выражения из файла filename.txt
+                2. Построение дерева с помощью TreeBuilder
+                3. Вывод исходного дерева и вычисление значения
+                4. Преобразование дерева с удалением операций деления
+                5. Вывод преобразованного дерева и значения
+                6. Освобождение памяти
+            </program_flow>
+            <dependencies>
+                <class>TreeBuilder</class>
+                <class>TreeTransformer</class>
+                <class>TreeUtils</class>
+            </dependencies>
+        </function>
+    </functions>
+    
+    <user_interface>
+        <features>
+            <feature>Визуализация структуры дерева</feature>
+            <feature>Вывод инфиксной записи</feature>
+            <feature>Автоматическое вычисление значений</feature>
+            <feature>Подробный вывод до и после преобразования</feature>
+        </features>
+    </user_interface>
+    
+    <dependencies>
+        <include_local>tree_builder.h</include_local>
+        <include_local>tree_transformer.h</include_local>
+        <include_local>tree_utils.h</include_local>
+        <include_system>iostream</include_system>
+        <include_system>iomanip</include_system>
+    </dependencies>
+    
+    <author>Alyssa</author>
+    <last_modified>2024-10-06</last_modified>
+</file_documentation>

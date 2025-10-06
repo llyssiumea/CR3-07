@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>graph_analyzer.h</name>
+        <path>3/Graf7/graph_analyzer.h</path>
+        <type>Header</type>
+        <version>2.3</version>
+        <description>Анализатор графа для поиска общих городов между двумя штаб-квартирами</description>
+    </file_info>
+    
+    <class name="GraphAnalyzer">
+        <description>Анализатор пересекающихся зон влияния корпораций</description>
+        <purpose>Находит города, достижимые из двух штаб-квартир с ограничением по промежуточным городам</purpose>
+        
+        <constructors>
+            <constructor>
+                <parameters>
+                    <param name="graph" type="const AdjacencyMatrix&amp;">Матрица смежности</param>
+                    <param name="cityCount" type="int">Количество городов</param>
+                </parameters>
+                <description>Конструктор, принимающий граф и количество городов</description>
+            </constructor>
+        </constructors>
+        
+        <public_methods>
+            <method name="findCommonCities" return="std

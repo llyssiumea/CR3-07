@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>tree_utils.cpp</name>
+        <path>2/CalcTree4/tree_utils.cpp</path>
+        <type>Implementation</type>
+        <version>2.0</version>
+        <description>Реализация вспомогательных функций для работы с деревьями выражений</description>
+    </file_info>
+    
+    <implementations>
+        <method name="TreeNode::TreeNode">
+            <description>Конструктор узла дерева, инициализирует значение и указатели на поддеревья</description>
+        </method>
+        
+        <method name="TreeNode::~TreeNode">
+            <description>Деструктор, рекурсивно удаляет левое и правое поддеревья</description>
+            <algorithm>Рекурсивное удаление в post-order порядке</algorithm>
+        </method>
+        
+        <method name="TreeUtils::operatorToCode">
+            <description>Преобразование символа оператора в соответствующий числовой код</description>
+            <mapping>
+                <operator symbol="+" code="-1"/>
+                <operator symbol="-" code="-2"/>
+                <operator symbol="*" code="-3"/>
+                <operator symbol="/" code="-4"/>
+                <operator symbol="%" code="-5"/>
+                <operator symbol="^" code="-6"/>
+            </mapping>
+        </method>
+        
+        <method name="TreeUtils::codeToOperator">
+            <description>Обратное преобразование числового кода в символ оператора</description>
+            <mapping>
+                <code value="-1" operator="+"/>
+                <code value="-2" operator="-"/>
+                <code value="-3" operator="*"/>
+                <code value="-4" operator="/"/>
+                <code value="-5" operator="%"/>
+                <code value="-6" operator="^"/>
+            </mapping>
+        </method>
+        
+        <method name="TreeUtils::computeOperation">
+            <description>Выполнение арифметической операции с обработкой ошибок</description>
+            <operations>
+                <operation code="-1">left + right</operation>
+                <operation code="-2">left - right</operation>
+                <operation code="-3">left * right</operation>
+                <operation code="-4">left / right (целочисленное)</operation>
+                <operation code="-5">left % right (остаток)</operation>
+                <operation code="-6">pow(left, right) (степень)</operation>
+            </operations>
+            <error_handling>
+                <check>Деление на ноль для операций / и %</check>
+                <exception>std::runtime_error с описанием ошибки</exception>
+            </error_handling>
+        </method>
+        
+        <method name="TreeUtils::isDivisionOperation">
+            <description>Проверка, является ли операция делением или взятием остатка</description>
+            <returns>true для кодов -4 (/) и -5 (%)</returns>
+        </method>
+        
+        <method name="TreeUtils::isOperator">
+            <description>Проверка строки на соответствие символам арифметических операций</description>
+            <valid_operators>+, -, *, /, %, ^</valid_operators>
+        </method>
+    </implementations>
+    
+    <dependencies>
+        <include_local>tree_utils.h</include_local>
+        <include_system>stdexcept</include_system>
+        <include_system>cmath</include_system>
+    </dependencies>
+    
+    <author>Alyssa</author>
+    <last_modified>2024-10-06</last_modified>
+</file_documentation>

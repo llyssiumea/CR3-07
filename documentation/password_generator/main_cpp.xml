@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>main.cpp</name>
+        <path>1/password_generator/main.cpp</path>
+        <type>Main Program</type>
+        <version>2.0</version>
+        <description>Основная программа генератора паролей с пользовательским интерфейсом</description>
+    </file_info>
+    
+    <functions>
+        <function name="displayMainMenu" return="int">
+            <description>Отображение главного меню программы и получение выбора пользователя</description>
+            <menu_options>
+                <option value="1">Низкая сложность (8 символов)</option>
+                <option value="2">Средняя сложность (12 символов)</option>
+                <option value="3">Высокая сложность (16 символов)</option>
+                <option value="4">Выход</option>
+            </menu_options>
+            <error_handling>Обработка некорректного ввода через cin.fail()</error_handling>
+        </function>
+        
+        <function name="main" return="int">
+            <description>Главная функция программы, управляющая основным циклом работы</description>
+            <program_flow>
+                1. Инициализация локали для русских символов
+                2. Создание экземпляра PasswordGenerator
+                3. Основной цикл do-while до выбора выхода
+                4. Отображение меню и обработка выбора
+                5. Генерация и анализ пароля
+                6. Повтор цикла или завершение
+            </program_flow>
+            <dependencies>
+                <class>PasswordGenerator</class>
+                <class>PasswordAnalyzer</class>
+            </dependencies>
+        </function>
+    </functions>
+    
+    <user_interface>
+        <language>Russian</language>
+        <encoding>UTF-8</encoding>
+        <features>
+            <feature>Интерактивное меню</feature>
+            <feature>Обработка ошибок ввода</feature>
+            <feature>Подробный вывод результатов</feature>
+            <feature>Возможность многократной генерации</feature>
+        </features>
+    </user_interface>
+    
+    <dependencies>
+        <include_local>password_generator.h</include_local>
+        <include_local>password_analyzer.h</include_local>
+        <include_system>iostream</include_system>
+        <include_system>limits</include_system>
+    </dependencies>
+    
+    <author>Alyssa</author>
+    <last_modified>2024-10-06</last_modified>
+</file_documentation>

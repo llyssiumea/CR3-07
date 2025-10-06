@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file_documentation>
+    <file_info>
+        <name>tree_transformer.h</name>
+        <path>2/CalcTree4/tree_transformer.h</path>
+        <type>Header</type>
+        <version>2.0</version>
+        <description>Преобразование дерева выражений с удалением операций деления</description>
+    </file_info>
+    
+    <class name="TreeTransformer">
+        <description>Преобразователь дерева арифметического выражения</description>
+        <purpose>Выполняет преобразование дерева, заменяя операции деления и остатка на вычисленные значения</purpose>
+        
+        <static_methods>
+            <method name="removeDivisionOperations" return="TreeNode*">
+                <parameters>
+                    <param name="root" type="TreeNode*">Корень дерева для преобразования</param>
+                </parameters>
+                <description>Основная функция преобразования дерева</description>
+                <returns>Указатель на корень преобразованного дерева</returns>
+            </method>
+            
+            <method name="evaluateSubtree" return="int">
+                <parameters>
+                    <param name="root" type="TreeNode*">Корень поддерева</param>
+                </parameters>
+                <description>Вычисление значения поддерева</description>
+                <throws>std::runtime_error при ошибках вычисления</throws>
+            </method>
+        </static_methods>
+        
+        <private_methods>
+            <method name="evaluateRecursive" return="int">
+                <parameters>
+                    <param name="node" type="TreeNode*">Текущий узел</param>
+                </parameters>
+                <description>Рекурсивное вычисление значения поддерева</description>
+            </method>
+            
+            <method name="transformRecursive" return="TreeNode*">
+                <parameters>
+                    <param name="node" type="TreeNode*">Текущий узел</param>
+                </parameters>
+                <description>Рекурсивное преобразование поддерева</description>
+            </method>
+        </private_methods>
+    </class>
+    
+    <transformation_rules>
+        <rule>Операции деления (/) заменяются на вычисленное значение</rule>
+        <rule>Операции остатка (%) заменяются на вычисленное значение</rule>
+        <rule>Остальные операции сохраняются без изменений</rule>
+        <rule>Операнды (листья) сохраняются без изменений</rule>
+    </transformation_rules>
+    
+    <dependencies>
+        <include_local>tree_utils.h</include_local>
+    </dependencies>
+    
+    <author>Alyssa</author>
+    <last_modified>2024-10-06</last_modified>
+</file_documentation>

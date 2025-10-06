@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project_documentation>
+    <project name="CR3-07">
+        <description>Три улучшенные реализации задач по программированию</description>
+        <author>Alyssa</author>
+        <version>1.0</version>
+        
+        <module name="password_generator">
+            <description>Генератор паролей с тремя уровнями сложности</description>
+            <files>
+                <file name="password_generator.h" type="header">
+                    <class name="PasswordGenerator">
+                        <method name="generateLowStrength">Генерация простого пароля</method>
+                        <method name="generateMediumStrength">Генерация среднего пароля</method>
+                        <method name="generateHighStrength">Генерация сложного пароля</method>
+                    </class>
+                </file>
+                <file name="password_generator.cpp" type="implementation">
+                    <description>Реализация методов генерации паролей</description>
+                </file>
+                <!-- остальные файлы -->
+            </files>
+        </module>
+        
+        <module name="expression_tree">
+            <!-- аналогично -->
+        </module>
+        
+        <module name="graph_analyzer">
+            <!-- аналогично -->
+        </module>
+    </project>
+</project_documentation>
